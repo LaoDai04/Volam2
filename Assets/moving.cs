@@ -8,14 +8,8 @@ public class SimpleMove : MonoBehaviour
 
     void Update()
     {
-        // Get input from the user
-        Mouse mouse = Mouse.current;
-        float horizontalInput = mouse.in;
-        float verticalInput = mouse.delta.y.ReadValue();
-
-        // Create a movement vector based on input
-        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime;
-        // Move the object
-        transform.Translate(movement);
+        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+        transform.position += moveDirection * moveSpeed * Time.deltaTime;
     }
 }
